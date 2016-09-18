@@ -25,8 +25,8 @@ linregRC <- function(formula, data){
   regresion$resid()
   regresion
 }
-aa <- linregRC(regres, iris)
-aa$data
-aa$pred()
-class(aa)
-print(aa)
+#aa <- linregRC(regres, iris)
+#aa$data
+#aa$pred()
+#class(aa)
+#print(aa)
