@@ -1,0 +1,32 @@
+#' A package for handling linear regression models using QR decomposition.
+#'
+#' @description The linearRegression package provides a class to handle linear regression models, \code{linreg}.\cr
+#' In the package there is also the function \code{linregRC} which return an object of class \code{linreg} with all statistics
+#' stored in it.
+#' 
+#' @details The class linear regression has the following structure:
+#' \itemize{
+#'    \item Attributes\cr\itemize{
+#'      \item First item
+#'      \item Second item
+#'    }
+#'   \item Methods\cr\itemize{
+#'      \item First item
+#'      \item Second item
+#'    }
+#' }
+
+#'
+#' @author \itemize{
+#'      \item Teno González Dos Santos - \url{https://github.com/tenoglez}
+#'      \item Josué Álvarez Robles - \url{https://github.com/ejarkm}
+#'      \item Jose Luis López Ruiz - \url{https://github.com/pepelu8000}
+#'    }
+#' 
+#' @references Linear regression - \url{https://en.wikipedia.org/wiki/Linear_regression}\cr
+#' QR Decomposition - \url{https://en.wikipedia.org/wiki/QR_decomposition}
+#'
+#'
+#' @docType package
+#' @name linearRegression
+"_PACKAGE"
