@@ -1,11 +1,13 @@
-linreg <- setRefClass("RCclass", fields = c("indep", "dep", "predicted", "residuals", "data", "formula"))
+linreg <- setRefClass("linreg", fields = c("indep", "dep", "coef", "predicted", "residuals", "data", "formula"))
 linreg$methods(list(coefficients
                = function(){
                   indep <<- model.frame(formula)
                   dep <<- as.matrix(indep[1])
                   colnames(dep) <<- colnames(indep)[1]
                   indep <<- cbind(rep(1,length(indep)),as.matrix(indep[-1]))
-                  solve(crossprod(indep))%*%t(indep)%*%dep
+                  coef <<- as.vector(solve(crossprod(indep))%*%t(indep)%*%dep)
+                  names(coef) <<- c("(Intercept)", colnames(indep)[-1])
+                  coef
                }
                ,pred
                = function(){
@@ -17,16 +19,18 @@ linreg$methods(list(coefficients
                  residuals <<- dep - predicted
                  residuals
                }
-              ))
-linregRC <- function(formula, data){
-  regresion <- linreg$new(data = data, formula = formula)
-  regresion$coefficients()
-  regresion$pred()
-  regresion$resid()
-  regresion
+              )
+)
+
+print.linreg <- function(regression){
+  regression$coef
 }
-#aa <- linregRC(regres, iris)
-#aa$data
-#aa$pred()
-#class(aa)
-#print(aa)
+
+linregRC <- function(formula, data){
+  regression <- linreg$new(data = data, formula = formula)
+  regression$coefficients()
+  regression$pred()
+  regression$resid()
+  
+  return(regression)
+}
