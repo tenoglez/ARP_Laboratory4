@@ -34,3 +34,9 @@ linregRC <- function(formula, data){
   
   return(regression)
 }
+
+aa <- linregRC(regres, iris)
+str(aa)
+methods(aa)
+linreg
+??usingMethods
