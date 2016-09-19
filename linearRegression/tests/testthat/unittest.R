@@ -1,5 +1,7 @@
 # unittest
 library(testthat)
+library(linearRegression)
+
 
 # testing with dataset "iris" and "faithful"
 data("iris")
