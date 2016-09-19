@@ -1,27 +1,35 @@
 library(testthat)
 library(linreg)
 
-# example
+# example data
 data("iris")
-lm.regres <- lm(iris$Sepal.Length ~ iris$Sepal.Width)
-# object
-obj <- linregRC(iris$Sepal.Length ~ iris$Sepal.Width, iris)
+data("faithful")
+lm.iris <- lm(iris$Sepal.Length ~ iris$Sepal.Width)
+lm.faithful <- lm(faithful$eruptions ~ faithful$waiting)
 
-lm("iris$Sepal.Length ~ iris$Sepal.Width", iris)
+# object
+obj.iris <- linregRC(iris$Sepal.Length ~ iris$Sepal.Width, iris)
+obj.faithful <- linregRC(faithful$eruptions ~ faithful$waiting, faithful)
+
+# Error input function linregRC
+test_that("Error input linregRC", {
+  expect_error(linregRC("a", iris), "class(formula) == \"formula\" is not TRUE", fixed=TRUE)
+  expect_error(linregRC(formula, "str"), "is.data.frame(data) is not TRUE")
+})
+
 
 # method coefficients()
-test_that("Coefficients correct values", {
-  expect_equal(obj$coefficients(), lm.regres$coefficients)
+test_that("Coefficients method", {
+  expect_equal(round(obj$coefficients(), 5), round(lm.regres$coefficients, 5))
 })
 
-test_that("Error input ---", {
-  expect_error(linregRC("a", iris), "class(formula) == \"formula\" is not TRUE", fixed=TRUE)
-})
+
 
 # method resid()
 test_that("Residuos correct values", {
   expect_equal(obj$resid(), lm.regres$resid())
 })
+
 
 # method predic()
 test_that("Predicts correct values", {
@@ -30,12 +38,9 @@ test_that("Predicts correct values", {
 
 
 
-# function linreg()
-expect_equal(class(x)=="linreg")
-expect_equal(class(x$resid)=="numeric")
-expect_equal(class(x$pred)=="numeric")
-expect_equal(class(x$coef)=="numeric")
+#  testing linreg attributes' class
 
-
-# arguments linreg
-expect_equal(class(x$resid)=="formula")
+expect_equal(class(obj.iris)=="linreg")
+expect_true(is.numeric(obj.iris$resid))
+expect_equal(class(obj.iris$pred)=="numeric")
+expect_equal(class(obj.iris$coef)=="numeric")
