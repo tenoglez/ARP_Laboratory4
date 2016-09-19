@@ -1,46 +1,47 @@
+# unittest
 library(testthat)
-library(linreg)
 
-# example data
+# testing with dataset "iris" and "faithful"
 data("iris")
 data("faithful")
+# creating linear regression with lm function
 lm.iris <- lm(iris$Sepal.Length ~ iris$Sepal.Width)
 lm.faithful <- lm(faithful$eruptions ~ faithful$waiting)
 
-# object
-obj.iris <- linregRC(iris$Sepal.Length ~ iris$Sepal.Width, iris)
-obj.faithful <- linregRC(faithful$eruptions ~ faithful$waiting, faithful)
+# example objects to calculate linear regresion (using QR)
+obj.iris <- QRlinreg(iris$Sepal.Length ~ iris$Sepal.Width, iris)
+obj.faithful <- QRlinreg(faithful$eruptions ~ faithful$waiting, faithful)
 
-# Error input function linregRC
-test_that("Error input linregRC", {
-  expect_error(linregRC("a", iris), "class(formula) == \"formula\" is not TRUE", fixed=TRUE)
-  expect_error(linregRC(formula, "str"), "is.data.frame(data) is not TRUE")
+# Input error for function QRlinreg
+test_that("Input error for function QRlinreg: ", {
+  expect_error(QRlinreg("a", iris), "class(formula) == \"formula\" is not TRUE", fixed=TRUE)
+  expect_error(QRlinreg(formula, "str"), "is.data.frame(data) is not TRUE")
 })
 
+# testing expected output of our methods:
+# for each one we had to round the results 
 
-# method coefficients()
-test_that("Coefficients method", {
-  expect_equal(round(obj$coefficients(), 5), round(lm.regres$coefficients, 5))
+# coef() method
+test_that("coef() method", {
+  expect_equal(round(obj.iris$coefficients, 5), round(lm.iris$coefficients, 5))
+  expect_equal(round(obj.faithful$coefficients, 5), round(lm.faithful$coefficients, 5))
 })
 
-
-
-# method resid()
+# resid() method
 test_that("Residuos correct values", {
-  expect_equal(obj$resid(), lm.regres$resid())
+  expect_equal(round(obj.iris$residuals, 5), round(lm.iris$residuals, 5))
+  expect_equal(round(obj.faithful$residuals,5), round(lm.faithful$residuals, 5))
+})
+
+# pred() method
+test_that("pred() method", {
+  expect_equal(round(obj.iris$predicted, 5), round(lm.iris$fitted.values, 5))
+  expect_equal(round(obj.faithful$predicted, 5), round(lm.faithful$fitted.valued, 5))
 })
 
 
-# method predic()
-test_that("Predicts correct values", {
-  expect_equal(obj$predic(), lm.regres$predic())
-})
-
-
-
-#  testing linreg attributes' class
-
-expect_equal(class(obj.iris)=="linreg")
-expect_true(is.numeric(obj.iris$resid))
-expect_equal(class(obj.iris$pred)=="numeric")
-expect_equal(class(obj.iris$coef)=="numeric")
+#  testing linreg and attributes' class
+expect_equal(class(obj.iris) == "linreg")
+expect_true(is.numeric(obj.iris$coefficients))
+expect_true(is.numeric(obj.iris$residuals))
+expect_true(is.numeric(obj.iris$predicted))
