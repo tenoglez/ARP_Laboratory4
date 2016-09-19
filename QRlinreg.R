@@ -1,7 +1,10 @@
 linreg <- setRefClass("linreg", fields = c("indep", "dep", "coefficients", "predicted", "residuals", "data", "formula"))
 linreg$methods(list(coef
                     = function(){
-                      indep <<- model.frame(formula)
+                      stopifnot(class(formula) == "formula")
+                      stopifnot(is.data.frame(data))
+                      
+                      indep <<- model.frame(formula, data=data)
                       dep <<- as.matrix(indep[1])
                       colnames(dep) <<- colnames(indep)[1]
                       indep <<- cbind(rep(1,length(indep)),as.matrix(indep[-1]))
