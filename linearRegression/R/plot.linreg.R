@@ -16,6 +16,8 @@
 
 plot.linreg <- function(linreg.obj, standarized.residuals = FALSE){
   library(ggplot2)
+  library(png)
+  library(grid)
   if (standarized.residuals == TRUE){
     standarized <- sqrt(abs((linreg.obj$residuals - mean(linreg.obj$residuals))/sd(linreg.obj$residuals)))
     df <- data.frame(linreg.obj$predicted, standarized)
@@ -25,13 +27,18 @@ plot.linreg <- function(linreg.obj, standarized.residuals = FALSE){
     ylabel.name <- "Residuals"
   }
   
+  img <- readPNG("images/liu_logo.png") 
+  g <- rasterGrob(img, interpolate=TRUE) 
+  
   colnames(df) <- c("predicted", "residuals")
   
   gp <- ggplot(df,aes(x=predicted, y=residuals))
-  gp <- gp + geom_point()+theme_bw()
-  gp <- gp + geom_smooth(method=lm,se=FALSE)
+  gp <- gp + annotation_custom(g, xmin=-Inf, xmax=Inf, ymin=-Inf, ymax=Inf)
+  gp <- gp + theme(panel.background = element_rect(colour = "black", fill = "#B3F5F3"))
+  gp <- gp + geom_point(size = 2)
+  gp <- gp + geom_smooth(method=lm,se=FALSE, color = "red")
   gp <- gp + xlab("Fitted values")
   gp <- gp + ylab(ylabel.name)
-  gp <- gp + ggtitle("Residuals vs Fitted")
+  gp <- gp + ggtitle(paste(ylabel.name, "vs Fitted"))
   gp
 }
