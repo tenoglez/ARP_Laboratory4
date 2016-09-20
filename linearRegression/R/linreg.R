@@ -58,7 +58,7 @@ linreg$methods(list(coef = function(){
                       residuals
                     },
                     df = function() {
-                      degrees_freedom <<- nrow(indep) - (ncol(indep)-1)
+                      degrees_freedom <<- nrow(indep) - (ncol(indep))
                     },
                     var = function() {
                       v.res <- as.numeric((t(residuals)%*%residuals)) / degrees_freedom
