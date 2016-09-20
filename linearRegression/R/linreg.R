@@ -62,8 +62,8 @@ linreg$methods(list(coef = function(){
                     },
                     var = function() {
                       v.res <- as.numeric((t(residuals)%*%residuals)) / degrees_freedom
-                      X <- as.matrix(indep[,-1])
-                      variance <<- as.numeric(v.res * solve(t(X)%*%X))
+                      variance <<- matrix(as.numeric((diag(ncol(indep))*v.res) * solve(t(indep)%*%indep)), nrow=3)
+                      variance <<- diag(variance)
                     }
                 )
             )
