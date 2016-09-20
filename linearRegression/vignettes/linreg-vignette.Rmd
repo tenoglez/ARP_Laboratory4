@@ -1,0 +1,75 @@
+---
+title: "Linear regression models with package linearRegression"
+author: "Teno González Dos Santos, Jose Luis López Ruiz, Enrique Josué Álvarez Robles"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Linear regression models with linreg}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+This vignette documents the content provided in the package linearRegression 1.0.0. This vignette is a high-level adjunct to the low-level details found in *?linearRegression*, *?linreg*, *?QRlinreg*, *?print.linreg*, *?plot.linreg* and *?summary.linreg*. You’ll learn how to work with linearRegression by creating a new object of class *linreg* with *QRlinreg()* and using methods such as *print()*, *plot()* or *summary()*.
+
+## Creating an object of class linreg
+
+### Class linreg
+
+The key content in our package is the class linreg. This class is designed for dealing with linear regression models using QR decomposition method. It is organized the following way:
+
+- **Attributes**
+
+Attribute name | Description    
+---------------|-----------------------------
+coefficients   | vector of coefficients
+predicted      | vector of predicted values
+residuals      | vector of residuals  
+
+- **Basic methods**
+
+Method name  | Description    
+-------------|-------------------------------------------
+coef         | returns the vector of residuals e
+pred         | returns the predicted values y
+resid        | return the coefficients as a named vector  
+
+### QRlinreg function
+
+This function allows you to generate an object of class linreg given two parameters: a formula and a dataset. The parameter **formula** must be an R object of type *formula* and **data** must be a *data.frame*. The resulting object of class linreg will have stored all the statistics in it for the given parameters. In the following example you will see how to create this objects:
+
+```{r QRlinreg, eval=FALSE}
+data(iris)
+linreg.obj <- QRlinreg(Sepal.Length ~ Sepal.Width, iris)
+```
+
+## Other useful methods of class linreg
+
+In addition to the basic statistic methods that **linreg** provides, there are available other three different methods: *print()*, *plot()* and *summary()*. These methods override the conventional functions with identical name when an object of class *linreg* is passed as an argument.
+
+### print() function
+
+This is an *ad hoc* version of the ordinary *print()* function. It prints out the coefficients and coefficient names, similar as done by the *lm* class.
+
+```{r print.linreg, eval=FALSE}
+qr.obj <- QRlinreg(Sepal.Length ~ Sepal.Width, iris)
+print(qr.obj)
+```
+
+### plot() function
+
+This is an *ad hoc* version of the generic *plot()* function. It plots graphs using *ggplot2*.
+
+```{r plot.linreg, eval=FALSE}
+qr.obj <- QRlinreg(Sepal.Length ~ Sepal.Width, iris)
+plot(qr.obj)
+plot(qr.obj, standarized_residuals = TRUE)
+```
+
+### summary() function
+
+This is an *ad hoc* version of the basic *summary()* function. It returns a similar printout as printed for *lm* objects, but only with the coefficients with their standard error, t-value and p-value as well as the estimate of *sigma* and the degrees of freedom in the model.
+
+```{r summary.linreg, eval=FALSE}
+qr.obj <- QRlinreg(Sepal.Length ~ Sepal.Width, iris)
+summary(qr.obj)
+```

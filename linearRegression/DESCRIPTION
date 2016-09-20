@@ -11,3 +11,6 @@ Description: A faster and robust tool for handling linear regression models
 Imports: ggplot2, testthat
 License: LiU
 RoxygenNote: 5.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
