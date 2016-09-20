@@ -31,6 +31,12 @@ linreg$methods(list(coef = function(){
                       stopifnot(class(formula) == "formula", is.data.frame(data))
 
                       indep <<- model.frame(formula, data=data)
+                      for (i in 2:length(indep)){
+                        if (class(indep[,i]) == "factor"){
+                          indep[,i] <<- as.numeric(indep[,i])
+                        }
+                      }
+                      
                       dep <<- as.matrix(indep[1])
                       colnames(dep) <<- colnames(indep)[1]
                       indep <<- cbind(rep(1,length(indep)),as.matrix(indep[-1]))
