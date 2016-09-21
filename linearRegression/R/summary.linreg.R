@@ -18,7 +18,7 @@ summary.linreg <- function(linreg.obj){
   quants <- quantile(linreg.obj$residuals, probs = seq(0, 1, 0.25))
   std.error <- sqrt(linreg.obj$variance)
   t.val <- coefficients/sqrt(linreg.obj$variance)
-  p.val <- 2*(1-abs(t.val), linreg.obj)
+  p.val <- 2*(1-abs(t.val), linreg.obj$degrees_freedom)
   
   df <- data.frame(linreg.obj$coefficients, std.error, t.val, p.val)
   colnames(df) <- c("Estimate", "Std. Error", "t-value", "Pr(>|t|)" )
