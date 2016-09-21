@@ -26,7 +26,7 @@
 #' linreg$new(data = faithful, formula = faithful$eruption ~ faithful$waiting)
 
 
-linreg <- setRefClass("linreg", fields = c("indep", "dep", "coefficients", "predicted", "residuals", "data", "formula"))
+linreg <- setRefClass("linreg", fields = c("indep", "dep", "coefficients", "predicted", "residuals", "variance", "degrees_freedom", "data", "formula"))
 linreg$methods(list(coef = function(){
                       stopifnot(class(formula) == "formula", is.data.frame(data))
 
@@ -56,6 +56,14 @@ linreg$methods(list(coef = function(){
                     resid = function(){
                       residuals <<- dep - predicted
                       residuals
+                    },
+                    df = function() {
+                      degrees_freedom <<- nrow(indep) - (ncol(indep))
+                    },
+                    var = function() {
+                      v.res <- as.numeric((t(residuals)%*%residuals)) / degrees_freedom
+                      variance <<- matrix(as.numeric((diag(ncol(indep))*v.res) * solve(t(indep)%*%indep)), nrow=3)
+                      variance <<- diag(variance)
                     }
                 )
             )
