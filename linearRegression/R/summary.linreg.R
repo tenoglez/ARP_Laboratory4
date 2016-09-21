@@ -16,12 +16,13 @@
 
 summary.linreg <- function(linreg.obj){
   quants <- quantile(linreg.obj$residuals, probs = seq(0, 1, 0.25))
-  std.error <- sqrt(aa$variance)
-  t.val <- coefficients/sqrt(aa$variance)
+  std.error <- sqrt(linreg.obj$variance)
+  t.val <- coefficients/sqrt(linreg.obj$variance)
+  p.val <- 2*(1-abs(t.val), linreg.obj)
   
-  df <- data.frame(linreg.obj$coefficients, std.error, t.val)
-  colnames(df) <- c("Estimate", "Std. Error", "t-value" )
-  rownames(df) <- paste("(Intercept)", rownames(df))
+  df <- data.frame(linreg.obj$coefficients, std.error, t.val, p.val)
+  colnames(df) <- c("Estimate", "Std. Error", "t-value", "Pr(>|t|)" )
+  rownames(df)[1] <- "(Intercept)"
   
   list(Residuals=quants, Coefficients=df)
 }
