@@ -26,4 +26,3 @@ summary.linreg <- function(linreg.obj){
   
   list(Residuals=quants, Coefficients=df)
 }
-summary(aa)
