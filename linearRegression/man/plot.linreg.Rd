@@ -14,7 +14,7 @@ Method that plot Fitted Values vs Residuals
 }
 \examples{
 qr.obj <- QRlinreg(iris$Sepal.Length ~ iris$Sepal.Width, iris)
-plot(qr.obj)
+#plot(qr.obj)
 
 }
 \references{

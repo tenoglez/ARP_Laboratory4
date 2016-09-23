@@ -15,7 +15,7 @@
 #' 
 #' @examples
 #' QRlinreg(iris$Sepal.Length ~ iris$Sepal.Width, iris)
-#' QRlinreg(faithful$eurption ~ faithful$waiting, faithful)
+#' QRlinreg(faithful$eruption ~ faithful$waiting, faithful)
 #' 
 
 QRlinreg <- function(formula, data){

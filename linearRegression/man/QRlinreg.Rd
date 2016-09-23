@@ -20,7 +20,7 @@ Creates an object of class \code{linreg} with all the statistics computed for an
 }
 \examples{
 QRlinreg(iris$Sepal.Length ~ iris$Sepal.Width, iris)
-QRlinreg(faithful$eurption ~ faithful$waiting, faithful)
+QRlinreg(faithful$eruption ~ faithful$waiting, faithful)
 
 }
 \references{

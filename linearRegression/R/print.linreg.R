@@ -15,5 +15,5 @@
 #' 
 
 print.linreg <- function(linreg.obj){
-  linreg.obj$coef
+  linreg.obj$coefficients
 }

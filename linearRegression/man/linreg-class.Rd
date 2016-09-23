@@ -26,8 +26,8 @@ Class of linear regression models using QR decompoisiton method
    }
 }
 \examples{
-linreg$new(data = iris, formula = iris$Sepal.Length ~ iris$Sepal.Width)
-linreg$new(data = faithful, formula = faithful$eruption ~ faithful$waiting)
+#linreg$new(data = iris, formula = iris$Sepal.Length ~ iris$Sepal.Width)
+#linreg$new(data = faithful, formula = faithful$eruption ~ faithful$waiting)
 }
 \references{
 QR Decomposition - \url{https://en.wikipedia.org/wiki/QR_decomposition}
