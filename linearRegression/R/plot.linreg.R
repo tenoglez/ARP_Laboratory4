@@ -50,7 +50,7 @@ plot.linreg <- function(linreg.obj, standarized.residuals = FALSE){
   gp2 <- gp2 + geom_point(size = 2)
   gp2 <- gp2 + geom_smooth(method=lm,se=FALSE, color = "red")
   gp2 <- gp2 + xlab("Fitted values")
-  gp2 <- gp2 + ylab(ylabel.name.stand)
+  gp2 <- gp2 + ylab(expression(sqrt("Standarized Residuals")))
   gp2 <- gp2 + ggtitle(paste(ylabel.name.stand, "vs Fitted"))
   
   grid.arrange(gp1, gp2, ncol = 1)
