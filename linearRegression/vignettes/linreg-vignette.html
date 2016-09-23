@@ -134,7 +134,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="qrlinreg-function" class="section level3">
 <h3>QRlinreg function</h3>
 <p>This function allows you to generate an object of class linreg given two parameters: a formula and a dataset. The parameter <strong>formula</strong> must be an R object of type <em>formula</em> and <strong>data</strong> must be a <em>data.frame</em>. The resulting object of class linreg will have stored all the statistics in it for the given parameters. In the following example you will see how to create this objects:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(iris)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
+devtools::<span class="kw">install_github</span>(<span class="st">&quot;ejarkm/ARP_Laboratory4&quot;</span>, <span class="dt">subdir=</span><span class="st">&quot;linearRegression&quot;</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## Skipping install of 'linearRegression' from a github remote, the SHA1 (36df05e5) has not changed since last install.
+##   Use `force = TRUE` to force installation</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(linearRegression)
+<span class="kw">data</span>(iris)
 linreg.obj &lt;-<span class="st"> </span><span class="kw">QRlinreg</span>(Sepal.Length ~<span class="st"> </span>Sepal.Width, iris)</code></pre></div>
 </div>
 </div>
@@ -146,6 +151,8 @@ linreg.obj &lt;-<span class="st"> </span><span class="kw">QRlinreg</span>(Sepal.
 <p>This is an <em>ad hoc</em> version of the ordinary <em>print()</em> function. It prints out the coefficients and coefficient names, similar as done by the <em>lm</em> class.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">qr.obj &lt;-<span class="st"> </span><span class="kw">QRlinreg</span>(Sepal.Length ~<span class="st"> </span>Sepal.Width, iris)
 <span class="kw">print</span>(qr.obj)</code></pre></div>
+<pre><code>## (Intercept) Sepal.Width 
+##   6.5262226  -0.2233611</code></pre>
 </div>
 <div id="plot-function" class="section level3">
 <h3>plot() function</h3>
@@ -159,6 +166,14 @@ linreg.obj &lt;-<span class="st"> </span><span class="kw">QRlinreg</span>(Sepal.
 <p>This is an <em>ad hoc</em> version of the basic <em>summary()</em> function. It returns a similar printout as printed for <em>lm</em> objects, but only with the coefficients with their standard error, t-value and p-value as well as the estimate of <em>sigma</em> and the degrees of freedom in the model.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">qr.obj &lt;-<span class="st"> </span><span class="kw">QRlinreg</span>(Sepal.Length ~<span class="st"> </span>Sepal.Width, iris)
 <span class="kw">summary</span>(qr.obj)</code></pre></div>
+<pre><code>## $Residuals
+##         0%        25%        50%        75%       100% 
+## -1.5561394 -0.6332908 -0.1119796  0.5579488  2.2225495 
+## 
+## $Coefficients
+##               Estimate Std. Error   t-value  Pr(&gt;|t|)
+## (Intercept)  6.5262226  0.4788963 13.627631 0.0000000
+## Sepal.Width -0.2233611  0.1550809 -1.440287 0.1518983</code></pre>
 </div>
 </div>
 

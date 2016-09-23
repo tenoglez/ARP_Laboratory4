@@ -37,7 +37,10 @@ resid        | return the coefficients as a named vector
 
 This function allows you to generate an object of class linreg given two parameters: a formula and a dataset. The parameter **formula** must be an R object of type *formula* and **data** must be a *data.frame*. The resulting object of class linreg will have stored all the statistics in it for the given parameters. In the following example you will see how to create this objects:
 
-```{r QRlinreg, eval=FALSE}
+```{r QRlinreg}
+library(devtools)
+devtools::install_github("ejarkm/ARP_Laboratory4", subdir="linearRegression", build_vignettes = TRUE)
+library(linearRegression)
 data(iris)
 linreg.obj <- QRlinreg(Sepal.Length ~ Sepal.Width, iris)
 ```
@@ -50,7 +53,7 @@ In addition to the basic statistic methods that **linreg** provides, there are a
 
 This is an *ad hoc* version of the ordinary *print()* function. It prints out the coefficients and coefficient names, similar as done by the *lm* class.
 
-```{r print.linreg, eval=FALSE}
+```{r print.linreg}
 qr.obj <- QRlinreg(Sepal.Length ~ Sepal.Width, iris)
 print(qr.obj)
 ```
@@ -59,7 +62,7 @@ print(qr.obj)
 
 This is an *ad hoc* version of the generic *plot()* function. It plots graphs using *ggplot2*.
 
-```{r plot.linreg, eval=FALSE}
+```{r plot.linreg, eval = FALSE}
 qr.obj <- QRlinreg(Sepal.Length ~ Sepal.Width, iris)
 plot(qr.obj)
 plot(qr.obj, standarized_residuals = TRUE)
@@ -69,7 +72,7 @@ plot(qr.obj, standarized_residuals = TRUE)
 
 This is an *ad hoc* version of the basic *summary()* function. It returns a similar printout as printed for *lm* objects, but only with the coefficients with their standard error, t-value and p-value as well as the estimate of *sigma* and the degrees of freedom in the model.
 
-```{r summary.linreg, eval=FALSE}
+```{r summary.linreg}
 qr.obj <- QRlinreg(Sepal.Length ~ Sepal.Width, iris)
 summary(qr.obj)
 ```
