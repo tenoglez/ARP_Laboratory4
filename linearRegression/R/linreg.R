@@ -33,9 +33,9 @@ linreg$methods(list(coef = function(){
                       indep <<- model.frame(formula, data=data)
                       dep <<- as.matrix(indep[1])
                       colnames(dep) <<- colnames(indep)[1]
-                      indep <<- cbind(rep(1,length(indep)),as.matrix(indep[-1]))
+                      indep <<- cbind(rep(1,nrow(indep)),as.matrix(indep[-1]))
                       
-                      Q <- indep[,1:dim(indep)[2]]/sqrt(sum(indep[,1:dim(indep)[2]]^2))
+                      Q <- indep[,1:ncol(indep)]/sqrt(sum(indep[,1:ncol(indep)]^2))
                       R <- t(Q)%*%indep
                       coefficients <<- solve(t(R)%*%R)%*%t(R)%*%t(Q)%*%dep 
                       
@@ -56,7 +56,7 @@ linreg$methods(list(coef = function(){
                     },
                     var = function() {
                       v.res <- as.numeric((t(residuals)%*%residuals)) / degrees_freedom
-                      variance <<- matrix(as.numeric((diag(ncol(indep))*v.res) * solve(t(indep)%*%indep)), nrow=3)
+                      variance <<- matrix(as.numeric((diag(ncol(indep))*v.res) * solve(t(indep)%*%indep)), nrow=ncol(indep))
                       variance <<- diag(variance)
                     }
                 )
