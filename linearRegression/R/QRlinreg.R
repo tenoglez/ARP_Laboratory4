@@ -23,6 +23,8 @@ QRlinreg <- function(formula, data){
   regression$coef()
   regression$pred()
   regression$resid()
+  regression$df()
+  regression$var()
   
   return(regression)
 }
