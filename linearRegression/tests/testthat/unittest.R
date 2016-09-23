@@ -38,7 +38,7 @@ test_that("Residuos correct values", {
 # pred() method
 test_that("pred() method", {
   expect_equal(obj.iris$predicted, lm.iris$fitted.values)
-  expect_equal(obj.faithful$predicted, lm.faithful$fitted.valued)
+  expect_equal(obj.faithful$predicted, lm.faithful$fitted.values)
 })
 
 
