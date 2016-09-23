@@ -9,14 +9,13 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+This vignette documents the content provided in the package linearRegression 1.0.0. This vignette is a high-level adjunct to the low-level details found in *?linearRegression*, *?linreg*, *?QRlinreg*, *?print.linreg*, *?plot.linreg* and *?summary.linreg*. You’ll learn how to work with linearRegression by creating a new object of class *linreg* with *QRlinreg()* and using methods such as *print()*, *plot()* or *summary()*.
+
 ```{r, include = FALSE}
 library(devtools)
-devtools::install_github("ejarkm/ARP_Laboratory4", subdir="linearRegression", build_vignettes = TRUE)
+devtools::install_github("ejarkm/ARP_Laboratory4", subdir="linearRegression")
 library(linearRegression)
-
 ```
-
-This vignette documents the content provided in the package linearRegression 1.0.0. This vignette is a high-level adjunct to the low-level details found in *?linearRegression*, *?linreg*, *?QRlinreg*, *?print.linreg*, *?plot.linreg* and *?summary.linreg*. You’ll learn how to work with linearRegression by creating a new object of class *linreg* with *QRlinreg()* and using methods such as *print()*, *plot()* or *summary()*.
 
 ## Creating an object of class linreg
 
@@ -66,7 +65,7 @@ print(qr.obj)
 
 This is an *ad hoc* version of the generic *plot()* function. It plots graphs using *ggplot2*.
 
-```{r plot.linreg, eval=FALSE}
+```{r plot.linreg}
 qr.obj <- QRlinreg(Sepal.Length ~ Sepal.Width, iris)
 plot(qr.obj)
 ```
