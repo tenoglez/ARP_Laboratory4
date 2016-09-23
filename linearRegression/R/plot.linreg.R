@@ -27,7 +27,8 @@ plot.linreg <- function(linreg.obj, standarized.residuals = FALSE){
   df.stand <- data.frame(linreg.obj$predicted, standarized)
   ylabel.name.stand <- "Standarized Residuals"
   
-  img <- readPNG("images/liu_logo.png") 
+  
+  img <- readPNG(system.file("extdata", "liu_logo.png", package = "linearRegression")) 
   g <- rasterGrob(img, interpolate=TRUE) 
   
   colnames(df) <- c("predicted", "residuals")

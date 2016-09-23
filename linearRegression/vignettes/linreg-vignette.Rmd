@@ -9,6 +9,13 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r, include = FALSE}
+library(devtools)
+devtools::install_github("ejarkm/ARP_Laboratory4", subdir="linearRegression", build_vignettes = TRUE)
+library(linearRegression)
+
+```
+
 This vignette documents the content provided in the package linearRegression 1.0.0. This vignette is a high-level adjunct to the low-level details found in *?linearRegression*, *?linreg*, *?QRlinreg*, *?print.linreg*, *?plot.linreg* and *?summary.linreg*. You’ll learn how to work with linearRegression by creating a new object of class *linreg* with *QRlinreg()* and using methods such as *print()*, *plot()* or *summary()*.
 
 ## Creating an object of class linreg
@@ -38,9 +45,6 @@ resid        | return the coefficients as a named vector
 This function allows you to generate an object of class linreg given two parameters: a formula and a dataset. The parameter **formula** must be an R object of type *formula* and **data** must be a *data.frame*. The resulting object of class linreg will have stored all the statistics in it for the given parameters. In the following example you will see how to create this objects:
 
 ```{r QRlinreg}
-library(devtools)
-devtools::install_github("ejarkm/ARP_Laboratory4", subdir="linearRegression", build_vignettes = TRUE)
-library(linearRegression)
 data(iris)
 linreg.obj <- QRlinreg(Sepal.Length ~ Sepal.Width, iris)
 ```
@@ -62,10 +66,9 @@ print(qr.obj)
 
 This is an *ad hoc* version of the generic *plot()* function. It plots graphs using *ggplot2*.
 
-```{r plot.linreg, eval = FALSE}
+```{r plot.linreg, eval=FALSE}
 qr.obj <- QRlinreg(Sepal.Length ~ Sepal.Width, iris)
 plot(qr.obj)
-plot(qr.obj, standarized_residuals = TRUE)
 ```
 
 ### summary() function
