@@ -23,7 +23,7 @@ The class linear regression has the following structure:
      \item \code{pred()}: returns the predicted values \code{y}.
      \item \code{resid()}: return the coefficients as a named vector.
      \item \code{print()}: prints out the coefficients and coefficient names, similar as done by the \code{lm} class.
-     \item \code{plot()}: plots the following two plots using \code{ggplot2}.
+     \item \code{plot()}: plots graphs using \code{ggplot2}.
      \item \code{summary()}: returns a similar printout as printed for \code{lm} objects, but presents 
      the coefficients with their standard error, t-value and p-value as well as the estimate of \code{sigma} and the degrees
      of freedom in the model.
